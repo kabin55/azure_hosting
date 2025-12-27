@@ -10,7 +10,14 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 connectDB();
 
 const app = express();
-app.use(cors());
+
+// CORS: allow frontend
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // Production URL from Azure Static Web App
+  "http://localhost:5173"   // Local development
+];
+app.use(cors({ origin: allowedOrigins }));
+
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/authRoutes"));
