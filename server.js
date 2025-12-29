@@ -5,7 +5,6 @@ const connectDB = require("./config/db");
 const path = require("path");
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
-// app.use(express.static(path.join(__dirname, "../client/dist")));
 
 connectDB();
 
@@ -23,7 +22,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 
 
-  const clientPath = path.join(__dirname, 'client' ,'dist');
+  const clientPath = path.join(__dirname, './client' ,'dist');
 
   app.use(express.static(clientPath));
 
