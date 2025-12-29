@@ -1,0 +1,40 @@
+name: Azure Node.js CI/CD
+
+on:
+  push:
+    branches: [ main ]  # deploys on push to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout repository
+    - uses: actions/checkout@v3
+
+    # 2. Setup Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    # 3. Install backend dependencies
+    - name: Install backend dependencies
+      run: |
+        npm install
+
+    # 4. Build frontend
+    - name: Build frontend
+      run: |
+        cd client
+        npm install
+        npm run build
+       
+
+    # 5. Deploy to Azure Web App
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'login27'  # replace with your Azure App Service name
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
+        package: .
