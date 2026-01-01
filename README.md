@@ -1,5 +1,5 @@
 # azure_hosting
-Repository trying to deploy MERN project in azure 
+Repository for deploying a MERN project on Azure using a 2-tier architecture (client and server), featuring a simple login/signup page with MongoDB Atlas.
 
 
 # Url
